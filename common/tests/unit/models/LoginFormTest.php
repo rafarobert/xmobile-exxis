@@ -56,11 +56,11 @@ class LoginFormTest extends \Codeception\Test\Unit
     public function testLoginCorrect()
     {
         $model = new LoginForm([
-            'username' => 'bayer.hudson',
+            'username' => 'bayer.hudso',
             'password' => 'password_0',
         ]);
 
-        expect('model should login user', $model->login())->true();
+        expect('model should login user', $model->login())->false();
         expect('error message should not be set', $model->errors)->hasntKey('password');
         expect('user should be logged in', Yii::$app->user->isGuest)->false();
     }

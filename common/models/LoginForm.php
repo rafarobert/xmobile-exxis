@@ -56,7 +56,6 @@ class LoginForm extends Model
         if ($this->validate()) {
             return Yii::$app->user->login($this->getUser());
         }
-        
         return false;
     }
 
@@ -80,8 +79,8 @@ class LoginForm extends Model
     public function attributeLabels()
     {
         return [
-            'username' => Yii::t('app', 'Nombre de Usuario'),
-            'password' => Yii::t('app', 'Contraseña')
+            'username' => Yii::t('backend', 'lbl_User'),
+            'password' => Yii::t('backend', 'lbl_Pass')
         ];
     }
 }

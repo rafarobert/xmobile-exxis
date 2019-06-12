@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "persona".
@@ -21,6 +22,16 @@ class Persona extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
     public static function tableName()
     {
         return 'persona';
@@ -32,9 +43,9 @@ class Persona extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombrePersona', 'apellidoPPersona', 'apellidoMPersona', 'userId', 'created_at', 'updated_at'], 'required'],
-            [['estadoPersona', 'userId', 'created_at', 'updated_at'], 'integer'],
-            [['nombrePersona', 'apellidoPPersona', 'apellidoMPersona'], 'string', 'max' => 30],
+            /*[['nombrePersona', 'apellidoPPersona', 'apellidoMPersona', 'userId', 'created_at', 'updated_at'], 'required'],
+            [['userId', 'created_at', 'updated_at'], 'integer'],
+            [['nombrePersona', 'apellidoPPersona', 'apellidoMPersona'], 'string', 'max' => 30],*/
         ];
     }
 
@@ -44,14 +55,9 @@ class Persona extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idPersona' => 'Id Persona',
-            'nombrePersona' => 'Nombre Persona',
-            'apellidoPPersona' => 'Apellido P Persona',
-            'apellidoMPersona' => 'Apellido M Persona',
-            'estadoPersona' => 'Estado Persona',
-            'userId' => 'User ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'nombrePersona' => Yii::t('backend','lbl_Names'),
+            'apellidoPPersona' => Yii::t('backend','lbl_LastName'),
+            'apellidoMPersona' => Yii::t('backend','lbl_Mother')
         ];
     }
 }

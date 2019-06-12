@@ -5,7 +5,6 @@
 
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
-use yii\bootstrap\ActiveForm;
 
 AppAsset::register($this);
 ?>
@@ -22,6 +21,7 @@ AppAsset::register($this);
 </head>
 <body class="authentication-bg">
 <?php $this->beginBody() ?>
+    <div class="loader"></div>
         <?= $content ?>
 <?php $this->endBody() ?>
 </body>

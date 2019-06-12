@@ -3,8 +3,9 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use yii\helpers\Url;
 use yii\helpers\Html;
-use frontend\assets\AppAsset;
+use backend\assets\AppAsset;
 
 AppAsset::register($this);
 ?>
@@ -16,6 +17,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="baseUrl" content="<?= Url::base(true); ?>">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -23,18 +25,18 @@ AppAsset::register($this);
 
 <body>
     <?php $this->beginBody() ?>
+	
+	
+    <div class="loader"></div>
     <div class="wrap">
         <?= $this->render('header') ?>
         <?= $this->render('menu') ?>
         <div class="content-page" style="margin-top:0;padding-top:70px">
             <div class="content">
-                <!-- Start Content-->
                 <div class="container-fluid">
-                    <div class="row">
-                        <?= $content ?>
-                    </div>
-                </div> <!-- container -->
-            </div> <!-- content -->
+                    <?= $content ?>
+                </div>
+            </div>
             <?= $this->render('footer') ?>
         </div>
     </div>

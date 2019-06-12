@@ -1,61 +1,39 @@
-var app = angular.module("SistemaPOS",['ngRoute']);
+$(function(){
+  window.onload = function(){    
+    $(".loader").fadeOut("slow");
+  }
+  $(".loader").fadeOut("slow");
+  $(document).on('submit',function(){
+    $(".loader").fadeIn("slow");
+  });
+  $('[data-plugin="switchery"]').each(function (idx, obj) {
+    new Switchery($(this)[0], $(this).data());
+  });
 
-app.config(function($routeProvider) {
-  $routeProvider
-    .when('/',{
-      templateUrl: 'views/login.html',
-      controller: 'LoginController'
-    })
-    .when('/home',{
-      templateUrl: 'views/home.html'
-    })
-});
-
-app.controller('Base',function($scope,$location){
-  $scope.location = $location;
-  $scope.public = ($location.path() === '/') ? true : false;
-})
-
-app.directive('lHeader',function($timeout){
-  return {
-    restrict:'E',
-    scope: true,
-    templateUrl: 'views/layout/header.html',
-    link: function(){
-      $timeout(function(){
-        angular.element('.button-menu-mobile').on('click', function (event) {
-          var $body = angular.element('body');
-          event.preventDefault();
-          $body.toggleClass('sidebar-enable');
-          if (screen.width >= 768) {
-              $body.toggleClass('enlarged');
-          } else {
-              $body.removeClass('enlarged');
+  $('[data-plugin="switchery"]').on('change',function (event) {
+    event.stopPropagation();
+    var $self = $(this);
+    if ($self.val().localeCompare('todo') === 0) {
+      if ($self.is(':checked')) {
+        $('.chb_lista').each(function (idx, obj) {
+          if (!$(obj).is(':checked')) {
+            $(obj).trigger('click').unbind('change');
           }
-          angular.element('.slimscroll-menu').slimscroll({
-            height: 'auto',
-            position: 'right',
-            size: "8px",
-            color: '#9ea5ab',
-            wheelStep: 5,
-            touchScrollStep: 20
-          });
         });
-      });
+      } else {
+        $('.chb_lista').each(function (idx, obj) {
+          if ($(obj).is(':checked')) {
+            $(obj).trigger('click').unbind('change');
+          }
+        });
+      }
     }
+  });
+  if (status && status === '1') {
+    Swal.fire({
+      type  : 'success',
+      title : 'Correcto',
+      text  : 'La actualizacion se realizo correctamente'
+    });
   }
 });
-
-app.directive('lMenu',function($timeout){
-  return {
-    restrict:'E',
-    scope: true,
-    templateUrl: 'views/layout/menu.html',
-    link: function(){
-      $timeout(function(){
-        angular.element('#side-menu').metisMenu();
-      });
-    }
-  }
-});
-

@@ -7,7 +7,7 @@ $this->title = 'Signup';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container-fluid">
-    <div class="site-signup">
+    <?php /*<div class="site-signup">
         <h1><?= Html::encode($this->title) ?></h1>
 
         <p>Please fill out the following fields to signup:</p>
@@ -29,5 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php ActiveForm::end(); ?>
             </div>
         </div>
-    </div>
+    </div> */ ?>
 </div>
+<?= $this->registerJsFile(Yii::getAlias('@web') . '/js/jquery.js', ['position' => \yii\web\View::POS_BEGIN]); ?>

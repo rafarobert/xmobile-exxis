@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/La_Paz');
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -11,11 +12,34 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'defaultRoute' => 'login',
+    'modules' => [
+        'login' => [
+            'class' => 'backend\modules\Login\Login',
+        ],
+        'cliente' => [
+            'class' => 'backend\modules\Cliente\Cliente',
+        ],
+    ],
+    'timeZone' => 'America/La_Paz',
+    'language'=> getenv('LANG','es-bo'),
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
+        'assetManager' => [
+			'class' => 'yii\web\AssetManager',
+			'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'sourcePath' => null,
+                    'basePath' => '@webroot',
+                    'baseUrl' => '@web',
+                    'js' => [
+                        //'js/lolo.js',
+                    ]
+                ],
+			],
+		],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
@@ -31,6 +55,7 @@ return [
                 [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
+                    'logFile' => '@app/runtime/logs/my.log',
                 ],
             ],
         ],
